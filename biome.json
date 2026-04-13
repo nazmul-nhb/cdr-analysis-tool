@@ -1,0 +1,74 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on",
+                "useSortedAttributes": "on"
+            }
+        }
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 96,
+        "lineEnding": "lf"
+    },
+    "linter": {
+        "enabled": true,
+        "domains": {
+            "react": "recommended"
+        },
+        "rules": {
+            "recommended": true,
+            "correctness": {
+                "noUnusedVariables": "error",
+                "noUnusedImports": "error",
+                "useExhaustiveDependencies": "off"
+            },
+            "suspicious": {
+                "noExplicitAny": "error",
+                "noConfusingVoidType": "off",
+                "noUnknownAtRules": "warn",
+                "noArrayIndexKey": "info",
+                "noConsole": {
+                    "fix": "none",
+                    "level": "warn",
+                    "options": {
+                        "allow": ["warn", "table", "error", "info", "dir"]
+                    }
+                }
+            },
+            "style": {
+                "noNonNullAssertion": "warn",
+                "useConst": "warn",
+                "noParameterAssign": "error"
+            },
+            "complexity": {
+                "noForEach": "off"
+            },
+            "performance": {
+                "noDelete": "off"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "enabled": true,
+            "arrowParentheses": "always",
+            "quoteStyle": "single",
+            "semicolons": "always",
+            "trailingCommas": "es5",
+            "jsxQuoteStyle": "double"
+        }
+    },
+    "files": {
+        "includes": ["**/*.{js,ts,jsx,tsx,mjs,html,css,json}", "!**/node_modules", "!**/dist"]
+    }
+}
