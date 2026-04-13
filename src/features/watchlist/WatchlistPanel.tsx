@@ -64,6 +64,7 @@ export function WatchlistPanel({
                         Add
                     </Button>
                     <Button
+                        bg={watchlist.length ? 'red' : 'gray'}
                         disabled={watchlist.length === 0}
                         leftSection={<IconTrash size={16} />}
                         onClick={onClear}

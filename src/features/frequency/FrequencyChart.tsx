@@ -38,9 +38,9 @@ export function FrequencyChart({ relations }: FrequencyChartProps) {
                         <ResponsiveContainer>
                             <BarChart data={data}>
                                 <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="number" hide />
-                                <YAxis allowDecimals={false} />
-                                <Tooltip />
+                                <XAxis dataKey="number" />
+                                <YAxis />
+                                <Tooltip formatter={(v) => [v, `Total Calls`]} />
                                 <Bar dataKey="callCount" fill="#0ca678" radius={[6, 6, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>

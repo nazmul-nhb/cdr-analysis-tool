@@ -121,7 +121,7 @@ export function CDRTable({
         getFilteredRowModel: getFilteredRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        globalFilterFn: (row, _columnId, filterValue) => {
+        globalFilterFn: (row, __, filterValue) => {
             const freeText = String(filterValue).toLowerCase().trim();
             const numberQuery = sanitizePhoneNumber(freeText);
 

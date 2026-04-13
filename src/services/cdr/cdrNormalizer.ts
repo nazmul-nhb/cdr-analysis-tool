@@ -19,8 +19,7 @@ function toText(value: unknown): string {
 }
 
 function cleanPhoneNumber(value: unknown): string {
-    const digitsOnly = toText(value).replace(/[^\d]/g, '');
-    return digitsOnly;
+    return toText(value).split(/\s/)[0];
 }
 
 function parseTimeValue(
@@ -76,6 +75,24 @@ function excelSerialToDate(serial: number): Date {
     const excelEpoch = new Date(Date.UTC(1899, 11, 30));
     const milliseconds = serial * 24 * 60 * 60 * 1000;
     return new Date(excelEpoch.getTime() + milliseconds);
+}
+
+function parseCompactTimestamp(timestamp: string | number): Date {
+    const str = String(timestamp);
+
+    const year = Number(str.slice(0, 4));
+
+    const month = Number(str.slice(4, 6)) - 1;
+
+    const day = Number(str.slice(6, 8));
+
+    const hour = Number(str.slice(8, 10));
+
+    const minute = Number(str.slice(10, 12));
+
+    const second = Number(str.slice(12, 14));
+
+    return new Date(year, month, day, hour, minute, second);
 }
 
 function parseLooseDateString(text: string): Date | null {
@@ -157,7 +174,7 @@ function parseDateValue(value: unknown): Date | null {
         return excelSerialToDate(value);
     }
 
-    return parseLooseDateString(toText(value));
+    return parseLooseDateString(toText(value)) ?? parseCompactTimestamp(toText(value));
 }
 
 function mergeDateTime(dateValue: unknown, timeValue: unknown): Date | null {
@@ -169,11 +186,7 @@ function mergeDateTime(dateValue: unknown, timeValue: unknown): Date | null {
         return date;
     }
 
-    if (date) {
-        return date;
-    }
-
-    return parseDateValue(timeValue);
+    return date ?? parseDateValue(timeValue);
 }
 
 function parseDuration(value: unknown): number | null {
@@ -199,7 +212,7 @@ function parseDuration(value: unknown): number | null {
     }
 
     const numeric = Number(text.replace(/[^\d.]/g, ''));
-    return Number.isFinite(numeric) && numeric > 0 ? Math.round(numeric) : null;
+    return Number.isFinite(numeric) && numeric >= 0 ? Math.round(numeric) : null;
 }
 
 function buildRecordId(

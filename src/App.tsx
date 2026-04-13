@@ -47,31 +47,37 @@ function SectionFallback() {
 function App() {
     const [activeSection, setActiveSection] = useState<SidebarSection>('files');
 
-    const records = useCDRStore((state) => state.records);
-    const relations = useCDRStore((state) => state.relations);
-    const reverseRelations = useCDRStore((state) => state.reverseRelations);
-    const files = useCDRStore((state) => state.files);
-    const duplicates = useCDRStore((state) => state.duplicates);
-    const addImportedFiles = useCDRStore((state) => state.addImportedFiles);
-    const clearAllData = useCDRStore((state) => state.clearAllData);
+    const {
+        records,
+        addImportedFiles,
+        clearAllData,
+        duplicates,
+        files,
+        relations,
+        reverseRelations,
+    } = useCDRStore();
 
-    const activeNumber = useRelationStore((state) => state.activeNumber);
-    const nestedRelations = useRelationStore((state) => state.nestedRelations);
-    const openRootRelation = useRelationStore((state) => state.openRootRelation);
-    const openNestedRelation = useRelationStore((state) => state.openNestedRelation);
-    const closeRelationAtDepth = useRelationStore((state) => state.closeRelationAtDepth);
-    const closeAllRelations = useRelationStore((state) => state.closeAllRelations);
+    const {
+        activeNumber,
+        closeAllRelations,
+        closeRelationAtDepth,
+        nestedRelations,
+        openNestedRelation,
+        openRootRelation,
+    } = useRelationStore();
 
-    const colorScheme = useUIStore((state) => state.colorScheme);
-    const watchlist = useUIStore((state) => state.watchlist);
-    const dialogs = useUIStore((state) => state.dialogs);
-    const loading = useUIStore((state) => state.loading);
-    const toggleColorScheme = useUIStore((state) => state.toggleColorScheme);
-    const setDialogOpen = useUIStore((state) => state.setDialogOpen);
-    const setLoading = useUIStore((state) => state.setLoading);
-    const addWatchNumber = useUIStore((state) => state.addWatchNumber);
-    const removeWatchNumber = useUIStore((state) => state.removeWatchNumber);
-    const clearWatchlist = useUIStore((state) => state.clearWatchlist);
+    const {
+        colorScheme,
+        watchlist,
+        dialogs,
+        loading,
+        toggleColorScheme,
+        setDialogOpen,
+        setLoading,
+        addWatchNumber,
+        removeWatchNumber,
+        clearWatchlist,
+    } = useUIStore();
 
     const uniqueNumbers = selectUniqueNumbers(records);
     const relationStack = selectRelationStack(activeNumber, nestedRelations);

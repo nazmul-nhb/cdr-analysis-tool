@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { sanitizePhoneNumber } from '../utils/formatters';
 
 type DialogState = {
     commonContacts: boolean;
@@ -22,10 +23,6 @@ type UIStore = {
     removeWatchNumber: (number: string) => void;
     clearWatchlist: () => void;
 };
-
-function normalizeWatchNumber(number: string): string {
-    return number.replace(/[^\d]/g, '');
-}
 
 export const useUIStore = create<UIStore>()(
     persist(
@@ -59,7 +56,7 @@ export const useUIStore = create<UIStore>()(
                 })),
             addWatchNumber: (number) =>
                 set((state) => {
-                    const normalized = normalizeWatchNumber(number);
+                    const normalized = sanitizePhoneNumber(number);
 
                     if (!normalized || state.watchlist.includes(normalized)) {
                         return state;
@@ -72,7 +69,7 @@ export const useUIStore = create<UIStore>()(
             removeWatchNumber: (number) =>
                 set((state) => ({
                     watchlist: state.watchlist.filter(
-                        (item) => item !== normalizeWatchNumber(number)
+                        (item) => item !== sanitizePhoneNumber(number)
                     ),
                 })),
             clearWatchlist: () =>

@@ -33,8 +33,12 @@ export function RelationNode({
                     </Text>
                 </Stack>
 
-                <Button onClick={() => onOpenRelation(number)} variant="light">
-                    {hasNestedRelations ? 'Explore nested' : 'Open empty relation'}
+                <Button
+                    disabled={!hasNestedRelations}
+                    onClick={() => onOpenRelation(number)}
+                    variant="gradient"
+                >
+                    Explore nested
                 </Button>
             </Group>
         </Paper>

@@ -52,7 +52,7 @@ export function TimelineChart({ records }: TimelineChartProps) {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="label" />
                                 <YAxis allowDecimals={false} />
-                                <Tooltip />
+                                <Tooltip formatter={(v) => [v, `Total Calls`]} />
                                 <Line
                                     dataKey="callCount"
                                     stroke="#1c7ed6"

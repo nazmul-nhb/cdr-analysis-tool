@@ -1,5 +1,10 @@
 import { Badge, Button, Group, TextInput } from '@mantine/core';
-import { IconDownload, IconFileSpreadsheet, IconSearch } from '@tabler/icons-react';
+import {
+    IconClearAll,
+    IconDownload,
+    IconFileSpreadsheet,
+    IconSearch,
+} from '@tabler/icons-react';
 import type { ReactNode } from 'react';
 
 type TableFiltersProps = {
@@ -28,6 +33,9 @@ export function TableFilters({
     return (
         <Group align="flex-end" justify="space-between" wrap="wrap">
             <TextInput
+                __clearable
+                __clearSection={<IconClearAll size={16} />}
+                __clearSectionMode="clear"
                 label="Search records"
                 leftSection={<IconSearch size={16} />}
                 onChange={(event) => onQueryChange(event.currentTarget.value)}

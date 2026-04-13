@@ -1,5 +1,7 @@
+import { formatDate } from 'nhb-toolbox';
+
 export function sanitizePhoneNumber(value: string): string {
-    return value.replace(/[^\d]/g, '');
+    return value.split(/\s/)[0];
 }
 
 export function formatDuration(value: number | null): string {
@@ -27,10 +29,7 @@ export function formatDateTime(value: Date | null): string {
         return 'Unknown';
     }
 
-    return new Intl.DateTimeFormat(undefined, {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-    }).format(value);
+    return formatDate({ date: value, format: 'DD-MM-YYYY hh:mm:ss a' });
 }
 
 export function formatCompactNumber(value: number): string {

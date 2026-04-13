@@ -45,13 +45,13 @@ export function FileImportPanel({
                     <div>
                         <Title order={3}>File import</Title>
                         <Text c="dimmed" size="sm">
-                            Load multiple `.xls`, `.xlsx`, or `.csv` files and keep everything
-                            in browser memory.
+                            Load multiple `.xls`, `.xlsx`, or `.csv` files
                         </Text>
                     </div>
 
                     <Group gap="sm">
                         <Button
+                            bg={files.length ? 'red' : 'gray'}
                             disabled={files.length === 0}
                             leftSection={<IconTrash size={16} />}
                             onClick={onClear}

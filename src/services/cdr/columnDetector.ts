@@ -33,6 +33,7 @@ const COLUMN_ALIASES = {
         'call datetime',
         'call date time',
         'timestamp',
+        'start_dttime',
         'call timestamp',
         'event time',
     ],
