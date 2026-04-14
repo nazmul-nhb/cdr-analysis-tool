@@ -62,6 +62,7 @@ export async function readExcelFile(file: File): Promise<ImportedExcelFile> {
         fileName: file.name,
         rows,
         rowCount: rows.length,
+        sheetNames: workbook.SheetNames,
         sheetCount: workbook.SheetNames.length,
         warnings,
     };
@@ -79,6 +80,7 @@ export async function readExcelFiles(files: File[]): Promise<ImportedExcelFile[]
             fileName: files[index]?.name ?? `file-${index + 1}`,
             rows: [],
             rowCount: 0,
+            sheetNames: [],
             sheetCount: 0,
             warnings: [
                 result.reason instanceof Error

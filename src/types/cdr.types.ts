@@ -30,6 +30,7 @@ export type ImportedExcelFile = {
     fileName: string;
     rows: RawCDRRow[];
     rowCount: number;
+    sheetNames: string[];
     sheetCount: number;
     warnings: string[];
 };

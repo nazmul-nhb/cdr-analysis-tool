@@ -29,7 +29,7 @@ export function formatDateTime(value: Date | null): string {
         return 'Unknown';
     }
 
-    return formatDate({ date: value, format: 'DD-MM-YYYY hh:mm:ss a' });
+    return formatDate({ date: value, format: 'DD mmm, YYYY hh:mm:ss a' });
 }
 
 export function formatCompactNumber(value: number): string {

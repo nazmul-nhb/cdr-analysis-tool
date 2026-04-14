@@ -1,3 +1,4 @@
+import { naturalSort } from 'nhb-toolbox';
 import { create } from 'zustand';
 import { normalizeCDRRows } from '../services/cdr/cdrNormalizer';
 import { detectDuplicateRecords } from '../services/cdr/duplicateDetector';
@@ -87,5 +88,5 @@ export function selectUniqueNumbers(records: CDRRecord[]): string[] {
         }
     }
 
-    return [...numbers].sort((left, right) => left.localeCompare(right));
+    return [...numbers].sort((left, right) => naturalSort(left, right, { localeAware: true }));
 }

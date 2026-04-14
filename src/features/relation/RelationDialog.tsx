@@ -1,4 +1,5 @@
 import { Badge, Group, Modal, Stack, Text } from '@mantine/core';
+import { formatWithPlural } from 'nhb-toolbox';
 import { Fragment } from 'react/jsx-runtime';
 import type { RelationMap, ReverseRelationMap } from '../../types/cdr.types';
 import { RelationTree } from './RelationTree';
@@ -39,10 +40,10 @@ export function RelationDialog({
                         <Stack gap="md">
                             <Group gap="xs">
                                 <Badge color="blue" variant="light">
-                                    {outgoingCount} outgoing contacts
+                                    {formatWithPlural(outgoingCount, 'outgoing contact')}
                                 </Badge>
                                 <Badge color="teal" variant="light">
-                                    {incomingCount} incoming parents
+                                    {formatWithPlural(incomingCount, 'incoming contact')}
                                 </Badge>
                                 <Badge color="gray" variant="light">
                                     depth {depth + 1}

@@ -24,6 +24,7 @@ import {
 import { useEffect, useState } from 'react';
 
 import { NumberBadge } from '../../components/NumberBadge';
+import { PageSizeCombobox } from '../../components/PageSizeCombo';
 import type { CDRRecord } from '../../types/cdr.types';
 import { formatDateTime, formatDuration, sanitizePhoneNumber } from '../../utils/formatters';
 import { ColumnToggle } from './ColumnToggle';
@@ -53,8 +54,17 @@ export function CDRTable({
     const [sorting, setSorting] = useState<SortingState>([{ id: 'dateTime', desc: true }]);
     const [globalFilter, setGlobalFilter] = useState('');
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+    const [pagination, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 12,
+    });
 
     const columns: ColumnDef<CDRRecord>[] = [
+        {
+            accessorKey: 'id',
+            header: 'Serial',
+            cell: ({ row }) => `${row.index + 1}.`,
+        },
         {
             accessorKey: 'aParty',
             header: 'A Party',
@@ -108,12 +118,9 @@ export function CDRTable({
             sorting,
             globalFilter,
             columnVisibility,
+            pagination,
         },
-        initialState: {
-            pagination: {
-                pageSize: 12,
-            },
-        },
+        onPaginationChange: setPagination,
         onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
         onColumnVisibilityChange: setColumnVisibility,
@@ -221,10 +228,22 @@ export function CDRTable({
                 </ScrollArea>
 
                 <Group align="center" justify="space-between">
+                    <Group gap="xs">
+                        <Text c="dimmed" size="sm">
+                            Rows per page
+                        </Text>
+
+                        <PageSizeCombobox
+                            onChange={(value) => table.setPageSize(value)}
+                            pageSize={table.getState().pagination.pageSize}
+                        />
+                    </Group>
+
                     <Text c="dimmed" size="sm">
                         Page {table.getState().pagination.pageIndex + 1} of{' '}
                         {Math.max(table.getPageCount(), 1)}
                     </Text>
+
                     <Pagination
                         onChange={(page) => table.setPageIndex(page - 1)}
                         total={Math.max(table.getPageCount(), 1)}

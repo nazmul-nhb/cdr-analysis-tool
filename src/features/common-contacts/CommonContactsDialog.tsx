@@ -1,6 +1,6 @@
 import { Alert, Group, Modal, Paper, Select, Stack, Text, Title } from '@mantine/core';
+import { formatWithPlural } from 'nhb-toolbox';
 import { useState } from 'react';
-
 import { NumberBadge } from '../../components/NumberBadge';
 import { findCommonContacts } from '../../services/cdr/commonContacts';
 import type { RelationMap } from '../../types/cdr.types';
@@ -78,12 +78,17 @@ export function CommonContactsDialog({
                                         watchlist={watchlist}
                                     />
                                     <Text size="sm">
-                                        {match.combinedCallCount} combined calls •{' '}
-                                        {formatDuration(match.combinedDuration)}
+                                        {formatWithPlural(
+                                            match.combinedCallCount,
+                                            'combined call'
+                                        )}{' '}
+                                        • {formatDuration(match.combinedDuration)}
                                     </Text>
                                     <Text c="dimmed" size="sm">
-                                        Left: {match.leftStats.callCount} calls | Right:{' '}
-                                        {match.rightStats.callCount} calls
+                                        Left:{' '}
+                                        {formatWithPlural(match.leftStats.callCount, 'call')} |
+                                        Right:{' '}
+                                        {formatWithPlural(match.rightStats.callCount, 'call')}
                                     </Text>
                                 </Stack>
                             </Paper>

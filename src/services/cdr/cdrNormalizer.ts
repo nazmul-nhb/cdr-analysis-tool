@@ -1,3 +1,4 @@
+import { isNumber } from 'nhb-toolbox';
 import type {
     CDRRecord,
     DetectedColumnMap,
@@ -37,7 +38,7 @@ function parseTimeValue(
         };
     }
 
-    if (typeof value === 'number' && Number.isFinite(value)) {
+    if (isNumber(value)) {
         if (value >= 0 && value < 1) {
             const totalSeconds = Math.round(value * 24 * 60 * 60);
             return {
@@ -156,7 +157,7 @@ function parseDateValue(value: unknown): Date | null {
         return Number.isNaN(value.getTime()) ? null : value;
     }
 
-    if (typeof value === 'number' && Number.isFinite(value)) {
+    if (isNumber(value)) {
         if (value > 1_000_000_000_000) {
             const epochDate = new Date(value);
             if (!Number.isNaN(epochDate.getTime())) {
@@ -194,7 +195,7 @@ function parseDuration(value: unknown): number | null {
         return null;
     }
 
-    if (typeof value === 'number' && Number.isFinite(value)) {
+    if (isNumber(value)) {
         if (value > 0 && value < 1) {
             return Math.round(value * 24 * 60 * 60);
         }

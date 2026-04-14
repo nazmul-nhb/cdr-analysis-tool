@@ -1,5 +1,5 @@
 import { Button, Group, Paper, Stack, Text } from '@mantine/core';
-
+import { formatWithPlural } from 'nhb-toolbox';
 import { NumberBadge } from '../../components/NumberBadge';
 import type { RelationStats } from '../../types/cdr.types';
 import { formatDuration } from '../../utils/formatters';
@@ -29,7 +29,8 @@ export function RelationNode({
                         watchlist={watchlist}
                     />
                     <Text c="dimmed" size="sm">
-                        {stats.callCount} calls • {formatDuration(stats.totalDuration)}
+                        {formatWithPlural(stats.callCount, 'call')} •{' '}
+                        {formatDuration(stats.totalDuration)}
                     </Text>
                 </Stack>
 
