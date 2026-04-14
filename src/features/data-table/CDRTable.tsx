@@ -130,11 +130,11 @@ export function CDRTable({
         getPaginationRowModel: getPaginationRowModel(),
         globalFilterFn: (row, __, filterValue) => {
             const freeText = String(filterValue).toLowerCase().trim();
-            const numberQuery = sanitizePhoneNumber(freeText);
+            const numberQuery = sanitizePhoneNumber(freeText).toLowerCase();
 
             return (
-                row.original.aParty.includes(numberQuery) ||
-                row.original.bParty.includes(numberQuery) ||
+                row.original.aParty.toLowerCase().includes(numberQuery) ||
+                row.original.bParty.toLowerCase().includes(numberQuery) ||
                 row.original.fileSource.toLowerCase().includes(freeText) ||
                 formatDateTime(row.original.dateTime).toLowerCase().includes(freeText)
             );
