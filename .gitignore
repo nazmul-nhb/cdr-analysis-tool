@@ -25,3 +25,4 @@ dist-ssr
 
 .estimator
 __test.ts
+.VSCodeCounter
